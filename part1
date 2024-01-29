@@ -1,0 +1,81 @@
+using System;
+
+
+abstract class Animal
+{
+  
+    public string Name { get; set; }
+    public string Colour { get; set; }
+    public int Age { get; set; }
+
+    
+    public string GetName() => Name;
+    public string GetColour() => Colour;
+    public int GetAge() => Age;
+
+
+    public void SetName(string name) => Name = name;
+    public void SetColour(string colour) => Colour = colour;
+    public void SetAge(int age) => Age = age;
+
+    public abstract void Eat();
+}
+
+
+class Dog : Animal
+{
+    public override void Eat()
+    {
+        Console.WriteLine("Dogs eat meat.");
+    }
+}
+
+class Cat : Animal
+{
+    public override void Eat()
+    {
+        Console.WriteLine("Cats eat mice.");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Enter the dog's name: ");
+        string dogName = Console.ReadLine();
+
+       
+        Dog myDog = new Dog();
+
+        
+        myDog.SetName(dogName);
+        myDog.SetColour("Brown");
+        myDog.SetAge(3);
+
+   
+        Console.WriteLine($"\nDog Information:");
+        Console.WriteLine($"Name: {myDog.GetName()}, Colour: {myDog.GetColour()}, Age: {myDog.GetAge()}");
+
+        myDog.Eat();
+
+        Console.Write("\nEnter the cat's name: ");
+        string catName = Console.ReadLine();
+
+        
+        Cat myCat = new Cat();
+
+        
+        myCat.SetName(catName);
+        myCat.SetColour("White");
+        myCat.SetAge(2);
+
+        
+        Console.WriteLine($"\nCat Information:");
+        Console.WriteLine($"Name: {myCat.GetName()}, Colour: {myCat.GetColour()}, Age: {myCat.GetAge()}");
+
+        
+        myCat.Eat();
+    }
+}
+
