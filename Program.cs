@@ -1,50 +1,40 @@
 ﻿using System;
-using System.Collections.Generic;
 
-interface IAnimal
+
+abstract class Animal
 {
-    string Name { get; set; }
-    string Colour { get; set; }
-    double Height { get; set; }
-    int Age { get; set; }
-
-    void Eat();
-    string Cry();
-}
-
-class Dog : IAnimal
-{
+  
     public string Name { get; set; }
     public string Colour { get; set; }
-    public double Height { get; set; }
     public int Age { get; set; }
 
-    public void Eat()
-    {
-        Console.WriteLine("Dogs eat meat");
-    }
+    
+    public string GetName() => Name;
+    public string GetColour() => Colour;
+    public int GetAge() => Age;
 
-    public string Cry()
+
+    public void SetName(string name) => Name = name;
+    public void SetColour(string colour) => Colour = colour;
+    public void SetAge(int age) => Age = age;
+
+    public abstract void Eat();
+}
+
+
+class Dog : Animal
+{
+    public override void Eat()
     {
-        return "Woof!";
+        Console.WriteLine("Dogs eat meat.");
     }
 }
 
-class Cat : IAnimal
+class Cat : Animal
 {
-    public string Name { get; set; }
-    public string Colour { get; set; }
-    public double Height { get; set; }
-    public int Age { get; set; }
-
-    public void Eat()
+    public override void Eat()
     {
-        Console.WriteLine("Cats eat mice");
-    }
-
-    public string Cry()
-    {
-        return "Meow!";
+        Console.WriteLine("Cats eat mice.");
     }
 }
 
@@ -52,59 +42,40 @@ class Program
 {
     static void Main()
     {
-        
-        Console.Write("Enter a dog name: ");
+        Console.Write("Enter the dog's name: ");
         string dogName = Console.ReadLine();
-        Dog myDog = new Dog();
-        myDog.Name = dogName;
-
-        
-        Console.Write("Enter dog height: ");
-        myDog.Height = Convert.ToDouble(Console.ReadLine());
-        Console.Write("Enter dog colour: ");
-        myDog.Colour = Console.ReadLine();
-        Console.Write("Enter dog age: ");
-        myDog.Age = Convert.ToInt32(Console.ReadLine());
-
-      
-        Console.WriteLine($"Dog Details:\nName: {myDog.Name}\nHeight: {myDog.Height}\nColour: {myDog.Colour}\nAge: {myDog.Age}");
-
-        
-        myDog.Eat();
-        Console.WriteLine($"Dog says: {myDog.Cry()}");
-
-        
-        Console.Write("\nEnter a cat name: ");
-        string catName = Console.ReadLine();
-        Cat myCat = new Cat();
-        myCat.Name = catName;
-
-        
-        Console.Write("Enter cat height: ");
-        myCat.Height = Convert.ToDouble(Console.ReadLine());
-        Console.Write("Enter cat colour: ");
-        myCat.Colour = Console.ReadLine();
-        Console.Write("Enter cat age: ");
-        myCat.Age = Convert.ToInt32(Console.ReadLine());
-
-        Console.WriteLine($"\nCat Details:\nName: {myCat.Name}\nHeight: {myCat.Height}\nColour: {myCat.Colour}\nAge: {myCat.Age}");
 
        
+        Dog myDog = new Dog();
+
+        
+        myDog.SetName(dogName);
+        myDog.SetColour("Brown");
+        myDog.SetAge(3);
+
+   
+        Console.WriteLine($"\nDog Information:");
+        Console.WriteLine($"Name: {myDog.GetName()}, Colour: {myDog.GetColour()}, Age: {myDog.GetAge()}");
+
+        myDog.Eat();
+
+        Console.Write("\nEnter the cat's name: ");
+        string catName = Console.ReadLine();
+
+        
+        Cat myCat = new Cat();
+
+        
+        myCat.SetName(catName);
+        myCat.SetColour("White");
+        myCat.SetAge(2);
+
+        
+        Console.WriteLine($"\nCat Information:");
+        Console.WriteLine($"Name: {myCat.GetName()}, Colour: {myCat.GetColour()}, Age: {myCat.GetAge()}");
+
+        
         myCat.Eat();
-        Console.WriteLine($"Cat says: {myCat.Cry()}");
-
-        List<IAnimal> animals = new List<IAnimal>
-        {
-            myDog,
-            myCat
-            
-        };
-
-        Console.WriteLine("\nNames of all animals:");
-        foreach (var animal in animals)
-        {
-            Console.WriteLine(animal.Name);
-        }
     }
 }
 
